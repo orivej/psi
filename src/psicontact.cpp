@@ -720,7 +720,8 @@ void PsiContact::rerequestAuthorizationFrom()
 
 void PsiContact::removeAuthorizationFrom()
 {
-	qWarning("PsiContact::removeAuthorizationFrom()");
+	if (account())
+		account()->dj_denyReq(jid());
 }
 
 void PsiContact::remove()

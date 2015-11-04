@@ -4497,6 +4497,11 @@ void PsiAccount::dj_auth(const Jid &j)
 #endif
 }
 
+void PsiAccount::dj_denyReq(const Jid &j)
+{
+	d->client->sendSubscription(j, "unsubscribe");
+}
+
 void PsiAccount::dj_deny(const Jid &j)
 {
 	psi()->contactUpdatesManager()->contactDeauthorized(this, j);
@@ -4872,10 +4877,15 @@ void PsiAccount::handleEvent(const PsiEvent::Ptr &e, ActivationType activationTy
 			}
 		}
 		else if(ae->authType() == "subscribed") {
+			dj_authReq(ae->from());
 			if(!o->getOption("options.ui.notifications.successful-subscription").toBool())
 				putToQueue = false;
 		}
 		else if(ae->authType() == "unsubscribe") {
+			dj_deny(ae->from());
+			putToQueue = false;
+		} else if(ae->authType() == "unsubscribed") {
+			dj_denyReq(ae->from());
 			putToQueue = false;
 		}
 #ifdef YAPSI

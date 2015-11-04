@@ -308,6 +308,7 @@ public slots:
 	void dj_add(const XMPP::Jid &, const QString &, const QStringList &, bool authReq);
 	void dj_authReq(const Jid &);
 	void dj_auth(const Jid &);
+	void dj_denyReq(const Jid &);
 	void dj_deny(const Jid &);
 	void dj_rename(const Jid &, const QString &);
 	void dj_remove(const Jid &);
