@@ -2068,8 +2068,6 @@ void PsiAccount::getErrorInfo(int err, AdvancedConnector *conn, Stream *stream, 
 			s = tr("Generic stream error");
 		else if(x == XMPP::ClientStream::Conflict) {
 			s = tr("Conflict (remote login replacing this one)");
-			reconn = false;
-			disableAutoConnect = true;
 		}
 		else if(x == XMPP::ClientStream::ConnectionTimeout)
 			s = tr("Timed out from inactivity");
